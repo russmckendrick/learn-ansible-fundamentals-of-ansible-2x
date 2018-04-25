@@ -1,3 +1,3 @@
 .vagrant
 *.retry
-vyos/roles/vyos-firewall/backup/*
+roles/vyos-firewall/backup/*
