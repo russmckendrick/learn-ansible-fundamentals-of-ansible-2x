@@ -7,6 +7,7 @@
     region: "{{ ec2_region }}"
     protocol: "http"
     port: "80"
+    deregistration_delay_timeout: "15"
     vpc_id: "{{ vpc_info.vpc.id }}"
     state: "present"
     modify_targets: "false"

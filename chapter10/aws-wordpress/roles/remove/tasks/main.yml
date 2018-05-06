@@ -1,6 +1,18 @@
 ---
 # tasks file for roles/remove
 
+- name: remove the auto-scaling group
+  ec2_asg:
+    region: "{{ ec2_region }}"
+    name: "{{ environment_name }}-asg"
+    state: absent
+    wait_for_instances: "yes"
+    wait_timeout: "900"
+
+- name: wait for 2 minutes before continuing
+  pause:
+    minutes: 2
+
 - name: remove the efs shares
   efs:
     region: "{{ ec2_region }}"
@@ -139,3 +151,17 @@
     name: "{{ environment_name }}"
     state: "absent"
     cidr_block: "{{ vpc_cidr_block }}"
+
+- name: search through all of our AMIs
+  ec2_ami_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      name: "{{ environment_name }}-*"
+  register: amiFind
+
+- name: unregister all of our AMIs
+  ec2_ami:
+    image_id: "{{ item.image_id }}"
+    delete_snapshot: True
+    state: absent
+  with_items: "{{ amiFind.images }}"
