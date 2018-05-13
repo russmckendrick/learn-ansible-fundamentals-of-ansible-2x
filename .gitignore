@@ -1,5 +1,6 @@
 # Ansible bits
 *.retry
+generated_*
 
 # OS-specific
 .DS_Store
