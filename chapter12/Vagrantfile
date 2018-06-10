@@ -12,6 +12,7 @@ Vagrant.configure(API_VERSION) do |config|
   config.vm.box = BOX_NAME
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.gui = true
   config.vm.communicator = COMMUNICATOR
   config.winrm.username = USERNAME
   config.winrm.password = PASSWORD
