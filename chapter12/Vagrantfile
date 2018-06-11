@@ -19,7 +19,7 @@ Vagrant.configure(API_VERSION) do |config|
   config.vm.provider "virtualbox" do |v|
     v.memory = "4048"
     v.cpus = "4"
-    v.vm.gui = true
+    v.gui = true
   end
 
   config.vm.provider "vmware_fusion" do |v|
