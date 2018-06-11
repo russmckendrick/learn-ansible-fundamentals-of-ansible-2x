@@ -12,7 +12,6 @@ Vagrant.configure(API_VERSION) do |config|
   config.vm.box = BOX_NAME
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.gui = true
   config.vm.communicator = COMMUNICATOR
   config.winrm.username = USERNAME
   config.winrm.password = PASSWORD
@@ -20,6 +19,7 @@ Vagrant.configure(API_VERSION) do |config|
   config.vm.provider "virtualbox" do |v|
     v.memory = "4048"
     v.cpus = "4"
+    v.vm.gui = true
   end
 
   config.vm.provider "vmware_fusion" do |v|
